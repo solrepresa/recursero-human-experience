@@ -1,0 +1,48 @@
+# Recursero — El tiempo es una decisión
+**Human Experience · Hackathon 2025**
+
+## Cómo deployar en Vercel (cuenta gratuita)
+
+### 1. Subir a GitHub
+Creá un repositorio en GitHub y subí esta carpeta completa (`recursero/`).
+
+```bash
+git init
+git add .
+git commit -m "recursero inicial"
+git remote add origin https://github.com/TU_USUARIO/recursero.git
+git push -u origin main
+```
+
+### 2. Conectar a Vercel
+1. Entrá a [vercel.com](https://vercel.com) y creá una cuenta gratuita
+2. "Add New Project" → conectá tu cuenta de GitHub → seleccioná el repositorio
+3. Vercel detecta la estructura automáticamente. No toques nada. Clic en **Deploy**.
+
+### 3. Agregar la API key de Anthropic
+Una vez deployado, en el dashboard de Vercel:
+1. Tu proyecto → **Settings** → **Environment Variables**
+2. Agregá una variable:
+   - **Name:** `ANTHROPIC_API_KEY`
+   - **Value:** tu API key de Anthropic (la conseguís en [console.anthropic.com](https://console.anthropic.com))
+3. Clic en **Save**
+4. Volvé a **Deployments** → "Redeploy" para que tome la variable
+
+### 4. Listo
+Tu recursero queda en `https://TU-PROYECTO.vercel.app`
+
+---
+
+## Estructura del proyecto
+```
+recursero/
+├── index.html          → la presentación completa (8 slides)
+├── api/
+│   └── generate-term.js → función serverless que llama a Anthropic
+└── vercel.json          → configuración de rutas
+```
+
+## Cómo funciona el glosario interactivo
+- El frontend llama a `/api/generate-term` (nunca directamente a Anthropic)
+- La función serverless tiene la API key guardada como variable de entorno en Vercel
+- La API key nunca queda expuesta en el código del cliente
